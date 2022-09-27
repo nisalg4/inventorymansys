@@ -20,7 +20,11 @@ export class AppComponent {
   constructor(private http: HttpClient) {
     this.loadPosts();
   }
+  logout() {
+    localStorage.removeItem('token');
+  }
   loadPosts() {
+    /*
     this.http
       .get('https://jsonplaceholder.typicode.com/posts')
       .subscribe((Response) => {
@@ -39,7 +43,7 @@ export class AppComponent {
         alert(JSON.stringify(data));
       });
 
-    /*this.http
+    this.http
       .post('http://localhost:8080/addEmployee', body, { headers })
       .subscribe((data) => {
         // this.postId = data.id;

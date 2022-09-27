@@ -33,8 +33,12 @@ export class LoginComponent implements OnInit {
           // this.postId = data.id;
           const resp = JSON.parse(JSON.stringify(data));
           const roles = resp.roles;
+          const token = resp.token;
           if (data) alert(JSON.stringify(data));
           console.log(roles);
+          console.log(token);
+          localStorage.clear();
+          localStorage.setItem('token', token);
           if (roles[0] === 'admin') {
             this.router.navigate([`manager`]);
           } else if (roles[0] === 'user') {
