@@ -40,8 +40,16 @@ export class LoginComponent implements OnInit {
           localStorage.clear();
           localStorage.setItem('token', token);
           if (roles[0] === 'admin') {
+            localStorage.setItem(
+              'name',
+              (<HTMLInputElement>document.getElementById('uname')).value
+            );
             this.router.navigate([`manager`]);
           } else if (roles[0] === 'user') {
+            localStorage.setItem(
+              'username',
+              (<HTMLInputElement>document.getElementById('uname')).value
+            );
             this.router.navigate([`employee`]);
           }
         },

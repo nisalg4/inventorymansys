@@ -9,6 +9,7 @@ export class ManagerComponent implements OnInit {
   constructor() {}
   disptoken() {
     alert(localStorage.getItem('token'));
+    alert(localStorage.getItem('name'));
   }
 
   ngOnInit(): void {}

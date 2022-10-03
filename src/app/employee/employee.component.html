@@ -1,1 +1,29 @@
-<p>employee works!</p>
+<p>Hello {{name}} !</p>
+<button type="button" (click)="disptoken()">Display token</button>
+
+<div class="w3-row">
+  <div class="w3-twothird">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let x of tableData?.headers">
+            {{x.key}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableData?.data">
+          <td *ngFor="let h of tableData?.headers">
+            {{row[h.key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="w3-quarter">
+    <fieldset>
+      <legend>Table options</legend>
+    </fieldset>
+  </div>
+</div>
