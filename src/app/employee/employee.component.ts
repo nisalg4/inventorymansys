@@ -19,8 +19,8 @@ export class EmployeeComponent implements OnInit {
   dragTrace: { src: number; dest: number } | undefined;
 
   disptoken() {
-    alert(localStorage.getItem('token'));
-    alert(localStorage.getItem('username'));
+    //alert(localStorage.getItem('token'));
+    //alert(localStorage.getItem('username'));
 
     const headers = {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -33,7 +33,7 @@ export class EmployeeComponent implements OnInit {
       )
       .subscribe((data) => {
         // this.postId = data.id;
-        alert(data);
+        //alert(data);
         const headersfortable = ['assetId', 'name'].map(
           (x, i) => ({ key: x, index: i, isSelected: true } as ITableHeader)
         );
@@ -52,7 +52,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   render(headers: ITableHeader[], data: any) {
-    alert(headers);
+    //alert(headers);
     this.tableData = {
       headers: headers.filter((x) => x.isSelected),
       data: data,
