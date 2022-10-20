@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { EmployeeupdateformComponent } from './Employeeupdateform/Employeeupdateform.component';
 import { AssetupdateformComponent } from './assetupdateform/assetupdateform.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -15,7 +16,8 @@ export class ManagerComponent implements OnInit {
   public constructor(
     private changeDetector: ChangeDetectorRef,
     private http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   //data1 = [JSON.parse(this.data) as IAccountBalance];
@@ -145,7 +147,8 @@ export class ManagerComponent implements OnInit {
         .post('http://localhost:8080/addEmployee', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          alert('Employee Added');
+          location.reload();
         });
 
       const body2 = {
@@ -158,7 +161,7 @@ export class ManagerComponent implements OnInit {
         .post('http://localhost:8080/api/auth/signup', body2)
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          //alert(JSON.stringify(data));
         });
     }
   }
@@ -179,7 +182,8 @@ export class ManagerComponent implements OnInit {
         .post('http://localhost:8080/addAsset', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          alert('Asset Added');
+          location.reload();
         });
     }
   }
@@ -205,7 +209,8 @@ export class ManagerComponent implements OnInit {
         })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          alert('Asset Assigned');
+          location.reload();
         });
     }
   }
@@ -218,7 +223,8 @@ export class ManagerComponent implements OnInit {
       .get('http://localhost:8080/Employee/delete/' + employee.id, { headers })
       .subscribe((data) => {
         // this.postId = data.id;
-        console.log(data);
+        alert('Employee deleted');
+        location.reload();
       });
   }
 
@@ -253,7 +259,8 @@ export class ManagerComponent implements OnInit {
         })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          alert('Asset assignment deleted');
+          location.reload();
         });
     }
   }
@@ -312,6 +319,11 @@ export class ManagerComponent implements OnInit {
     this.allHeaders = headers;
     this.resetDragTracer();
     this.changeDetector.detectChanges();
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
   private resetDragTracer() {
     this.dragTrace = { src: -1, dest: -1 };

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,11 +17,12 @@ export class AppComponent {
   addBeverage(newBeverage: string) {
     this.beverages.push(newBeverage);
   }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.loadPosts();
   }
   logout() {
     localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
   loadPosts() {
     /*

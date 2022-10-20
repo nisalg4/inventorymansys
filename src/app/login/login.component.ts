@@ -10,12 +10,8 @@ import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
-  clickMessage = '';
-  onClickMe() {
-    this.clickMessage = 'You are my hero!';
-    this.clicked();
-  }
-  clicked() {
+
+  login() {
     // alert(this.clickMessage);
 
     const headers = {};
@@ -34,7 +30,7 @@ export class LoginComponent implements OnInit {
           const resp = JSON.parse(JSON.stringify(data));
           const roles = resp.roles;
           const token = resp.token;
-          if (data) alert(JSON.stringify(data));
+          // if (data) alert(JSON.stringify(data));
           console.log(roles);
           console.log(token);
           localStorage.clear();

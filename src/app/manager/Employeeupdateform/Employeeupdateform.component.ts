@@ -45,7 +45,8 @@ export class EmployeeupdateformComponent {
         .post('http://localhost:8080/updateEmployee', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          alert('Employee updated');
+          location.reload();
         });
 
       const body2 = {
@@ -58,7 +59,7 @@ export class EmployeeupdateformComponent {
         .post('http://localhost:8080/api/auth/updateUser', body2)
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          // alert(JSON.stringify(data));
         });
     }
     this.dialogRef.close();

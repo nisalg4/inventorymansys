@@ -37,7 +37,8 @@ export class AssetupdateformComponent {
         .post('http://localhost:8080/updateAsset', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert(JSON.stringify(data));
+          alert('Asset updated');
+          location.reload();
         });
     }
     this.dialogRef.close();

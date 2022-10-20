@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -10,7 +10,8 @@ export class EmployeeComponent implements OnInit {
   name = localStorage.getItem('username');
   public constructor(
     private changeDetector: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   //data1 = [JSON.parse(this.data) as IAccountBalance];
@@ -63,6 +64,10 @@ export class EmployeeComponent implements OnInit {
   }
   private resetDragTracer() {
     this.dragTrace = { src: -1, dest: -1 };
+  }
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
 }
 

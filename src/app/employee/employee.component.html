@@ -1,3 +1,25 @@
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(90, 9, 90, 0.409);
+    }
+  </style>
+</head>
+
 <p>Hello {{name}} !</p>
 
 <div class="w3-row">
@@ -22,3 +44,5 @@
 
 
 </div>
+
+<button type="button" (click)="logout()">Logout</button>
