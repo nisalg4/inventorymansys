@@ -5,6 +5,7 @@ import { DepartmentListComponent } from './department-list/department-list.compo
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
+import { EmployeeupdateformComponent } from './manager/Employeeupdateform/Employeeupdateform.component';
 import { ManagerComponent } from './manager/manager.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -16,6 +17,10 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'manager', component: ManagerComponent },
   { path: 'employee', component: EmployeeComponent },
+  {
+    path: 'manager/Employeeupdateform',
+    component: EmployeeupdateformComponent,
+  },
 ];
 
 @NgModule({
@@ -31,4 +36,5 @@ export const routingComponents = [
   SignUpComponent,
   ManagerComponent,
   EmployeeComponent,
+  EmployeeupdateformComponent,
 ];

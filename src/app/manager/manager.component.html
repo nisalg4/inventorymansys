@@ -1,106 +1,113 @@
 <p>Hello {{name}} !</p>
 
 
-<div class="w3-row">
-  <h3>Employees</h3>
-  <div class="w3-twothird" style="height:100px;overflow:auto;">
-    <table>
-      <thead>
-        <tr>
-          <th *ngFor="let x of tableData?.headers">
-            {{x.key}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of tableData?.data">
-          <td *ngFor="let h of tableData?.headers">
-            {{row[h.key]}}
-          </td>
-          <td><button type="button" (click)="deleteEmployee(row)">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <h4>Add or update a new employee</h4>
-  <div>
-    <label for="employeeid">Id:</label>
-    <input type="text" id="employeeid">
-    <label for="employeenme">Name:</label>
-    <input type="text" id="employeename">
-    <label for="employeenme">Password:</label>
-    <input type="text" id="employeepassword">
-    <div>
-      <label for="employeedateofbirth">Date of birth:</label>
-      <input type="text" id="employeedateofbirth">
+<mat-tab-group>
+  <mat-tab label="Employees">
+    <h3>Employees</h3>
+    <div class="w3-twothird" style="height:400px;overflow:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let x of tableData?.headers">
+              {{x.key}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableData?.data">
+            <td *ngFor="let h of tableData?.headers">
+              {{row[h.key]}}
+            </td>
+            <td><button type="button" (click)="deleteEmployee(row)">Delete</button></td>
+            <button mat-button (click)="updateemployeepopup(row)">Update</button>
+
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-  <button type="button" (click)="addemployee()">Add employee</button>
-  <button type="button" (click)="updateemployee()">Update employee</button>
-
-
-  <h3>Assets</h3>
-  <div class="w3-twothirds" style="height:100px;overflow:auto;">
-    <table>
-      <thead>
-        <tr>
-          <th *ngFor="let x of tableDataAssets?.headers">
-            {{x.key}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of tableDataAssets?.data">
-          <td *ngFor="let h of tableDataAssets?.headers">
-            {{row[h.key]}}
-          </td>
-          <td><button type="button" (click)="deleteAsset(row)">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h4>Add or update a new Asset</h4>
-  <div>
-    <label for="assetId">Asset Id:</label>
-    <input type="text" id="assetId">
-    <label for="assetName">Asset Name:</label>
-    <input type="text" id="assetName">
-  </div>
-  <button type="button" (click)="addAsset()">Add Asset</button>
-  <button type="button" (click)="updateAsset()">Update Asset</button>
+    <h4>Add or update a new employee</h4>
+    <div>
+      <label for="employeeid">Id:</label>
+      <input type="text" id="employeeid">
+      <label for="employeenme">Name:</label>
+      <input type="text" id="employeename">
+      <label for="employeenme">Password:</label>
+      <input type="text" id="employeepassword">
+      <div>
+        <label for="employeedateofbirth">Date of birth:</label>
+        <input type="text" id="employeedateofbirth">
+      </div>
+    </div>
+    <button type="button" (click)="addemployee()">Add employee</button>
 
 
 
-  <h3>Asset Assignments</h3>
-  <div class="w3-twothirds" style="height:100px;overflow:auto;">
-    <table>
-      <thead>
-        <tr>
-          <th *ngFor="let x of tableDataAssignments?.headers">
-            {{x.key}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of tableDataAssignments?.data">
-          <td *ngFor="let h of tableDataAssignments?.headers">
-            {{row[h.key]}}
-          </td>
-          <td><button type="button" (click)="deleteAssetAssignment(row)">Delete</button></td>
 
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </mat-tab>
+  <mat-tab label="Assets">
 
-  <h4>Add a new Asset to an Employee</h4>
-  <div>
-    <label for="EmployeeNameAssignmentId">Employee Name:</label>
-    <input type="text" id="EmployeeNameAssignmentId">
-    <label for="assetNameAssignmentId">Asset Name:</label>
-    <input type="text" id="assetNameAssignmentId">
-  </div>
-  <button type="button" (click)="addAssetAssignment()">Add Asset Assignment</button>
 
-</div>
+    <h3>Assets</h3>
+    <div class="w3-twothirds" style="height:400px;overflow:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let x of tableDataAssets?.headers">
+              {{x.key}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableDataAssets?.data">
+            <td *ngFor="let h of tableDataAssets?.headers">
+              {{row[h.key]}}
+            </td>
+            <td><button type="button" (click)="deleteAsset(row)">Delete</button></td>
+            <button mat-button (click)="updateassetpopup(row)">Update</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Add or update a new Asset</h4>
+    <div>
+      <label for="assetId">Asset Id:</label>
+      <input type="text" id="assetId">
+      <label for="assetName">Asset Name:</label>
+      <input type="text" id="assetName">
+    </div>
+    <button type="button" (click)="addAsset()">Add Asset</button>
+  </mat-tab>
+  <mat-tab label="Asset Assignments">
+
+    <h3>Asset Assignments</h3>
+    <div class="w3-twothirds" style="height:400px;overflow:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let x of tableDataAssignments?.headers">
+              {{x.key}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableDataAssignments?.data">
+            <td *ngFor="let h of tableDataAssignments?.headers">
+              {{row[h.key]}}
+            </td>
+            <td><button type="button" (click)="deleteAssetAssignment(row)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Add a new Asset to an Employee</h4>
+    <div>
+      <label for="EmployeeNameAssignmentId">Employee Name:</label>
+      <input type="text" id="EmployeeNameAssignmentId">
+      <label for="assetNameAssignmentId">Asset Name:</label>
+      <input type="text" id="assetNameAssignmentId">
+    </div>
+    <button type="button" (click)="addAssetAssignment()">Add Asset Assignment</button>
+  </mat-tab>
+</mat-tab-group>

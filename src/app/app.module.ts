@@ -11,6 +11,14 @@ import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmployeeupdateformComponent } from './manager/Employeeupdateform/Employeeupdateform.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { AssetupdateformComponent } from './manager/assetupdateform/assetupdateform.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +29,26 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     LoginComponent,
     ManagerComponent,
     EmployeeComponent,
-    SignUpComponent
+    SignUpComponent,
+    EmployeeupdateformComponent,
+    AssetupdateformComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

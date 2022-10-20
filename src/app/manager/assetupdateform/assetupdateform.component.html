@@ -1,0 +1,17 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  X
+</button>
+
+<h1 mat-dialog-title>ID: {{data.assetId}}</h1>
+<div mat-dialog-content>
+  <p>Name</p>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="updateAsset()">Update</button>
+</div>

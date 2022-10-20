@@ -1,7 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { assets } from '../employee/employee.component';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { EmployeeupdateformComponent } from './Employeeupdateform/Employeeupdateform.component';
+import { AssetupdateformComponent } from './assetupdateform/assetupdateform.component';
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -11,7 +14,8 @@ export class ManagerComponent implements OnInit {
   name = localStorage.getItem('name');
   public constructor(
     private changeDetector: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    public dialog: MatDialog
   ) {}
 
   //data1 = [JSON.parse(this.data) as IAccountBalance];
@@ -21,6 +25,33 @@ export class ManagerComponent implements OnInit {
   allHeaders: ITableHeader[] | undefined;
   dragTrace: { src: number; dest: number } | undefined;
 
+  updateemployeepopup(employee: employeeupdate) {
+    const dialogRef = this.dialog.open(EmployeeupdateformComponent, {
+      data: {
+        id: employee.id,
+        username: employee.username,
+        dateOfBirth: employee.dateOfBirth,
+        password: employee.password,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  updateassetpopup(asset: asset) {
+    const dialogRef = this.dialog.open(AssetupdateformComponent, {
+      data: {
+        assetId: asset.assetId,
+        name: asset.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   getEmployees() {
     //alert(localStorage.getItem('token'));
     //alert(localStorage.getItem('username'));
@@ -227,67 +258,6 @@ export class ManagerComponent implements OnInit {
     }
   }
 
-  updateAsset() {
-    var assetId = (<HTMLInputElement>document.getElementById('assetId')).value;
-    var assetName = (<HTMLInputElement>document.getElementById('assetName'))
-      .value;
-
-    if (assetId && assetName) {
-      //console.log(id);
-      const body = { assetId: assetId, name: assetName };
-      const headers = {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      };
-
-      this.http
-        .post('http://localhost:8080/updateAsset', body, { headers })
-        .subscribe((data) => {
-          // this.postId = data.id;
-          alert(JSON.stringify(data));
-        });
-    }
-  }
-
-  updateemployee() {
-    var id = (<HTMLInputElement>document.getElementById('employeeid')).value;
-    var name = (<HTMLInputElement>document.getElementById('employeename'))
-      .value;
-    var dateofBirth = (<HTMLInputElement>(
-      document.getElementById('employeedateofbirth')
-    )).value;
-    var password = (<HTMLInputElement>(
-      document.getElementById('employeepassword')
-    )).value;
-
-    if (id && name && dateofBirth && password) {
-      console.log(id);
-      const body = { id: id, username: name, dateOfBirth: dateofBirth };
-      const headers = {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      };
-
-      this.http
-        .post('http://localhost:8080/updateEmployee', body, { headers })
-        .subscribe((data) => {
-          // this.postId = data.id;
-          alert(JSON.stringify(data));
-        });
-
-      const body2 = {
-        id: id,
-        username: name,
-        password: password,
-        roles: ['user'],
-      };
-      this.http
-        .post('http://localhost:8080/api/auth/updateUser', body2)
-        .subscribe((data) => {
-          // this.postId = data.id;
-          alert(JSON.stringify(data));
-        });
-    }
-  }
-
   logstuff(smtg: any) {
     console.log('lgsutfffffff');
     console.log(smtg);
@@ -378,4 +348,11 @@ export interface AssetAssignment {
 export interface AssetAssignmentdelete {
   employee: string;
   asset: string;
+}
+
+export interface employeeupdate {
+  id: string;
+  username: string;
+  dateOfBirth: string;
+  password: string;
 }
