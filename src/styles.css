@@ -10,3 +10,6 @@ body{
 .mat-tab-label, .mat-tab-link{
   color:rgb(0, 0, 0) !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

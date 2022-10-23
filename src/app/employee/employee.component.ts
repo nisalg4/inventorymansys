@@ -35,7 +35,7 @@ export class EmployeeComponent implements OnInit {
       .subscribe((data) => {
         // this.postId = data.id;
         //alert(data);
-        const headersfortable = ['assetId', 'name'].map(
+        const headersfortable = ['name'].map(
           (x, i) => ({ key: x, index: i, isSelected: true } as ITableHeader)
         );
 

@@ -10,7 +10,7 @@
 
   header {
     background-color: black;
-    color: rgba(201, 12, 201, 0.65);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,64 +30,7 @@
     align-items: center;
     justify-content: center;
     height: 75vh;
-    width: stretch;
-
-  }
-
-  .form_class {
-    width: 500px;
-    padding: 40px;
-    border-radius: 8px;
-    background-color: white;
-    font-family: 'system-ui';
-    box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.3);
-  }
-
-  .form_div {
-    text-transform: uppercase;
-  }
-
-  .form_div>label {
-    letter-spacing: 3px;
-    font-size: 1rem;
-  }
-
-  .info_div {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .info_div {
-    letter-spacing: 1px;
-  }
-
-  .field_class {
-    width: 100%;
-    border-radius: 6px;
-    border-style: solid;
-    border-width: 1px;
-    padding: 5px 0px;
-    text-indent: 6px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-family: 'system-ui';
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-  }
-
-  .submit_class {
-    border-style: none;
-    border-radius: 5px;
-    background-color: #FFE6D4;
-    padding: 8px 20px;
-    font-family: 'system-ui';
-    text-transform: uppercase;
-    letter-spacing: .8px;
-    display: block;
-    margin: auto;
-    margin-top: 10px;
-    box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.2);
-    cursor: pointer;
+    flex-direction: column;
   }
 
   footer {
@@ -111,6 +54,16 @@
     color: white;
     font-weight: bold;
   }
+
+  label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: left;
+    width: 350px;
+    line-height: 26px;
+    margin-bottom: 10px;
+  }
 </style>
 
 <body>
@@ -119,17 +72,20 @@
   </header>
   <main>
     <div>
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" id="uname" required>
+      <label for="uname"><b>Username&nbsp; </b><input type="text" placeholder="Enter Username" id="uname"
+          required></label>
+
     </div>
     <div>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" id="psw" required>
+      <label for="psw"><b>Password&nbsp; </b><input type="password" placeholder="Enter Password" id="psw"
+          required></label>
+
     </div>
+
     <div>
       <button type="button" (click)="login()">Login</button>
     </div>
-
   </main>
+
 
 </body>

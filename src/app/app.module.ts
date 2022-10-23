@@ -3,10 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FirstcomponentComponent } from './firstgen/firstcomponent/firstcomponent.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BeveragesComponent } from './beverages/beverages.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -19,13 +16,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { AssetupdateformComponent } from './manager/assetupdateform/assetupdateform.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FirstcomponentComponent,
     routingComponents,
-    EmployeeListComponent,
     LoginComponent,
     ManagerComponent,
     EmployeeComponent,
@@ -42,6 +38,7 @@ import { AssetupdateformComponent } from './manager/assetupdateform/assetupdatef
     MatDialogModule,
     MatInputModule,
     FormsModule,
+    MatButtonModule,
   ],
   providers: [
     {

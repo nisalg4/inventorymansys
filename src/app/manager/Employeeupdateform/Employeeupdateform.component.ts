@@ -29,12 +29,8 @@ export class EmployeeupdateformComponent {
     var id = this.data.id;
     var name = this.data.username;
     var dateofBirth = this.data.dateOfBirth;
-    var password = this.data.password;
 
-    if (!password) {
-      password = 'password';
-    }
-    if (id && name && dateofBirth && password) {
+    if (id && name && dateofBirth) {
       console.log(id);
       const body = { id: id, username: name, dateOfBirth: dateofBirth };
       const headers = {
@@ -47,19 +43,6 @@ export class EmployeeupdateformComponent {
           // this.postId = data.id;
           alert('Employee updated');
           location.reload();
-        });
-
-      const body2 = {
-        id: id,
-        username: name,
-        password: password,
-        roles: ['user'],
-      };
-      this.http
-        .post('http://localhost:8080/api/auth/updateUser', body2)
-        .subscribe((data) => {
-          // this.postId = data.id;
-          // alert(JSON.stringify(data));
         });
     }
     this.dialogRef.close();

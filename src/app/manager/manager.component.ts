@@ -66,7 +66,7 @@ export class ManagerComponent implements OnInit {
       .subscribe((data) => {
         // this.postId = data.id;
         //alert(data);
-        const headersfortable = ['id', 'username', 'dateOfBirth'].map(
+        const headersfortable = ['username', 'dateOfBirth'].map(
           (x, i) => ({ key: x, index: i, isSelected: true } as ITableHeader)
         );
 
@@ -88,7 +88,7 @@ export class ManagerComponent implements OnInit {
       .subscribe((data) => {
         // this.postId = data.id;
         //alert(data);
-        const headersfortable = ['assetId', 'name'].map(
+        const headersfortable = ['name'].map(
           (x, i) => ({ key: x, index: i, isSelected: true } as ITableHeader)
         );
 
@@ -126,7 +126,6 @@ export class ManagerComponent implements OnInit {
   }
 
   addemployee() {
-    var id = (<HTMLInputElement>document.getElementById('employeeid')).value;
     var name = (<HTMLInputElement>document.getElementById('employeename'))
       .value;
     var dateofBirth = (<HTMLInputElement>(
@@ -136,9 +135,8 @@ export class ManagerComponent implements OnInit {
       document.getElementById('employeepassword')
     )).value;
 
-    if (id && name && dateofBirth && password) {
-      console.log(id);
-      const body = { id: id, username: name, dateOfBirth: dateofBirth };
+    if (name && dateofBirth && password) {
+      const body = { username: name, dateOfBirth: dateofBirth };
       const headers = {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       };
@@ -152,7 +150,6 @@ export class ManagerComponent implements OnInit {
         });
 
       const body2 = {
-        id: id,
         username: name,
         password: password,
         roles: ['user'],
@@ -167,13 +164,12 @@ export class ManagerComponent implements OnInit {
   }
 
   addAsset() {
-    var assetId = (<HTMLInputElement>document.getElementById('assetId')).value;
     var assetName = (<HTMLInputElement>document.getElementById('assetName'))
       .value;
 
-    if (assetId && assetName) {
+    if (assetName) {
       //console.log(id);
-      const body = { assetId: assetId, name: assetName };
+      const body = { name: assetName };
       const headers = {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       };
