@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { MatButtonModule } from '@angular/material/button';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
       password: 'password',
     };
     this.http
-      .post('http://localhost:8080/api/auth/login', {
+      .post(environment.URL + '/api/auth/login', {
         username: (<HTMLInputElement>document.getElementById('uname')).value,
         password: (<HTMLInputElement>document.getElementById('psw')).value,
       })

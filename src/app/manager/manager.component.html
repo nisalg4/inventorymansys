@@ -36,12 +36,15 @@
   </style>
 </head>
 
-<p>Hello {{name}} !</p>
+<h1 style="text-align: center;"><b>Hello {{name}} !</b>
+  <div mat-dialog-actions align="end"><button mat-raised-button color="warn" type="button"
+      (click)="logout()">LogOut</button></div>
+</h1>
 
 
-<mat-tab-group>
+<mat-tab-group mat-stretch-tabs>
   <mat-tab label="Employees">
-    <h3>Employees</h3>
+
     <div class="w3-twothird" style="height:400px;overflow:auto;">
       <table>
         <thead>
@@ -56,14 +59,17 @@
             <td *ngFor="let h of tableData?.headers">
               {{row[h.key]}}
             </td>
-            <td><button type="button" (click)="deleteEmployee(row)">Delete</button>
-              <button mat-button (click)="updateemployeepopup(row)">Update</button>
+            <td>
+              <button mat-raised-button (click)="updateemployeepopup(row)">Update</button>&nbsp;
+              <button mat-mini-fab color="primary" (click)="deleteEmployee(row)">
+                <mat-icon>delete</mat-icon>
+              </button>
+
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <h4>Add new employee</h4>
     <div>
       <div>
         <label for="employeenme">Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -82,7 +88,9 @@
 
       </div>
     </div>
-    <button type="button" (click)="addemployee()">Add employee</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button type="button" (click)="addemployee()">Add employee</button>
 
 
 
@@ -90,8 +98,6 @@
   </mat-tab>
   <mat-tab label="Assets">
 
-
-    <h3>Assets</h3>
     <div class="w3-twothirds" style="height:400px;overflow:auto;">
       <table>
         <thead>
@@ -106,15 +112,18 @@
             <td *ngFor="let h of tableDataAssets?.headers">
               {{row[h.key]}}
             </td>
-            <td><button type="button" (click)="deleteAsset(row)">Delete</button>
-              <button mat-button (click)="updateassetpopup(row)">Update</button>
+            <td>
+              <button mat-raised-button (click)="updateassetpopup(row)">Update</button>&nbsp;
+
+              <button mat-mini-fab color="primary" (click)="deleteAsset(row)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h4>Add new Asset</h4>
     <div>
 
       <div>
@@ -122,12 +131,14 @@
             id="assetName"></label>
 
       </div>
+
     </div>
-    <button type="button" (click)="addAsset()">Add Asset</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button type="button" (click)="addAsset()">Add Asset</button>
   </mat-tab>
   <mat-tab label="Asset Assignments">
 
-    <h3>Asset Assignments</h3>
     <div class="w3-twothirds" style="height:400px;overflow:auto;">
       <table>
         <thead>
@@ -142,13 +153,16 @@
             <td *ngFor="let h of tableDataAssignments?.headers">
               {{row[h.key]}}
             </td>
-            <td><button type="button" (click)="deleteAssetAssignment(row)">Delete</button></td>
+            <td>
+              <button mat-mini-fab color="primary" (click)="deleteAssetAssignment(row)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h4>Add a new Asset to an Employee</h4>
     <div>
       <div>
         <label for="EmployeeNameAssignmentId">Employee Name:&nbsp; <input type="text"
@@ -160,9 +174,9 @@
             id="assetNameAssignmentId"></label>
 
       </div>
-    </div>
-    <button type="button" (click)="addAssetAssignment()">Add Asset Assignment</button>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button type="button" (click)="addAssetAssignment()">Add Asset Assignment</button>
   </mat-tab>
 </mat-tab-group>
-
-<button type="button" (click)="logout()">LogOut</button>

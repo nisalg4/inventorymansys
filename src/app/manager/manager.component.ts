@@ -6,6 +6,12 @@ import { MatInputModule } from '@angular/material/input';
 import { EmployeeupdateformComponent } from './Employeeupdateform/Employeeupdateform.component';
 import { AssetupdateformComponent } from './assetupdateform/assetupdateform.component';
 import { Router } from '@angular/router';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -13,11 +19,15 @@ import { Router } from '@angular/router';
 })
 export class ManagerComponent implements OnInit {
   name = localStorage.getItem('name');
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
   public constructor(
     private changeDetector: ChangeDetectorRef,
     private http: HttpClient,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   //data1 = [JSON.parse(this.data) as IAccountBalance];
@@ -26,6 +36,14 @@ export class ManagerComponent implements OnInit {
   tableDataAssignments: IDynamicTable | undefined;
   allHeaders: ITableHeader[] | undefined;
   dragTrace: { src: number; dest: number } | undefined;
+
+  openSnackBar(message: any) {
+    this._snackBar.open(message, 'cancel', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 
   updateemployeepopup(employee: employeeupdate) {
     const dialogRef = this.dialog.open(EmployeeupdateformComponent, {
@@ -38,7 +56,9 @@ export class ManagerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
+      this.openSnackBar('Employee Updated');
+      this.getEmployees();
     });
   }
 
@@ -51,7 +71,9 @@ export class ManagerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
+      this.openSnackBar('Asset Updated');
+      this.getAssets();
     });
   }
   getEmployees() {
@@ -62,7 +84,7 @@ export class ManagerComponent implements OnInit {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     };
     const datafromapi = this.http
-      .get('http://localhost:8080/Employee/getAll', { headers })
+      .get(environment.URL + '/Employee/getAll', { headers })
       .subscribe((data) => {
         // this.postId = data.id;
         //alert(data);
@@ -84,7 +106,7 @@ export class ManagerComponent implements OnInit {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     };
     const datafromapi = this.http
-      .get('http://localhost:8080/Asset/getAll', { headers })
+      .get(environment.URL + '/Asset/getAll', { headers })
       .subscribe((data) => {
         // this.postId = data.id;
         //alert(data);
@@ -106,7 +128,7 @@ export class ManagerComponent implements OnInit {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     };
     const datafromapi = this.http
-      .get('http://localhost:8080/AssetAssignment/getAll', { headers })
+      .get(environment.URL + '/AssetAssignment/getAll', { headers })
       .subscribe((data) => {
         // this.postId = data.id;
         console.log(data);
@@ -142,11 +164,14 @@ export class ManagerComponent implements OnInit {
       };
 
       this.http
-        .post('http://localhost:8080/addEmployee', body, { headers })
+        .post(environment.URL + '/addEmployee', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert('Employee Added');
-          location.reload();
+          //alert('Employee Added');
+
+          //location.reload();
+          this.openSnackBar('Employee added');
+          this.getEmployees();
         });
 
       const body2 = {
@@ -155,7 +180,7 @@ export class ManagerComponent implements OnInit {
         roles: ['user'],
       };
       this.http
-        .post('http://localhost:8080/api/auth/signup', body2)
+        .post(environment.URL + '/api/auth/signup', body2)
         .subscribe((data) => {
           // this.postId = data.id;
           //alert(JSON.stringify(data));
@@ -175,11 +200,12 @@ export class ManagerComponent implements OnInit {
       };
 
       this.http
-        .post('http://localhost:8080/addAsset', body, { headers })
+        .post(environment.URL + '/addAsset', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert('Asset Added');
-          location.reload();
+
+          this.openSnackBar('Asset Added');
+          this.getAssets();
         });
     }
   }
@@ -200,28 +226,32 @@ export class ManagerComponent implements OnInit {
       };
 
       this.http
-        .post('http://localhost:8080/addAssetAssignmentforemployee', body, {
+        .post(environment.URL + '/addAssetAssignmentforemployee', body, {
           headers,
         })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert('Asset Assigned');
-          location.reload();
+
+          this.openSnackBar('Asset Assigned');
+          this.getAssetAssignments();
         });
     }
   }
 
   deleteEmployee(employee: employee) {
-    const headers = {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    };
-    const datafromapi = this.http
-      .get('http://localhost:8080/Employee/delete/' + employee.id, { headers })
-      .subscribe((data) => {
-        // this.postId = data.id;
-        alert('Employee deleted');
-        location.reload();
-      });
+    if (confirm('Are you sure you want to delete? ')) {
+      const headers = {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      };
+      const datafromapi = this.http
+        .get(environment.URL + '/Employee/delete/' + employee.id, {
+          headers,
+        })
+        .subscribe((data) => {
+          this.openSnackBar('Employee deleted');
+          this.getEmployees();
+        });
+    }
   }
 
   deleteAsset(asset: asset) {
@@ -229,7 +259,7 @@ export class ManagerComponent implements OnInit {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     };
     const datafromapi = this.http
-      .get('http://localhost:8080/Asset/delete/' + asset.assetId, {
+      .get(environment.URL + '/Asset/delete/' + asset.assetId, {
         headers,
       })
       .subscribe((data) => {
@@ -239,25 +269,27 @@ export class ManagerComponent implements OnInit {
   }
 
   deleteAssetAssignment(AssetAssignmentdelete: AssetAssignmentdelete) {
-    if (AssetAssignmentdelete.asset && AssetAssignmentdelete.employee) {
-      //console.log(id);
-      const body = {
-        employee: AssetAssignmentdelete.employee,
-        asset: AssetAssignmentdelete.asset,
-      };
-      const headers = {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      };
+    if (window.confirm('Are sure you want to delete this Asset Assignment ?')) {
+      if (AssetAssignmentdelete.asset && AssetAssignmentdelete.employee) {
+        //console.log(id);
+        const body = {
+          employee: AssetAssignmentdelete.employee,
+          asset: AssetAssignmentdelete.asset,
+        };
+        const headers = {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        };
 
-      this.http
-        .post('http://localhost:8080/deleteAssetAssignmentAsset', body, {
-          headers,
-        })
-        .subscribe((data) => {
-          // this.postId = data.id;
-          alert('Asset assignment deleted');
-          location.reload();
-        });
+        this.http
+          .post(environment.URL + '/deleteAssetAssignmentAsset', body, {
+            headers,
+          })
+          .subscribe((data) => {
+            // this.postId = data.id;
+            this.openSnackBar('Asset assignment deleted');
+            this.getAssetAssignments();
+          });
+      }
     }
   }
 

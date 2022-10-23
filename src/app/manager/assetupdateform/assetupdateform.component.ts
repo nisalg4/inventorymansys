@@ -8,6 +8,7 @@ import {
 } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { asset } from '../manager.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-assetupdateform',
@@ -34,11 +35,9 @@ export class AssetupdateformComponent {
       };
 
       this.http
-        .post('http://localhost:8080/updateAsset', body, { headers })
+        .post(environment.URL + '/updateAsset', body, { headers })
         .subscribe((data) => {
           // this.postId = data.id;
-          alert('Asset updated');
-          location.reload();
         });
     }
     this.dialogRef.close();

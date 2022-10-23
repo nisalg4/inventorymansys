@@ -2,13 +2,13 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 body{
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 960px;
   margin: auto;
 }
 
 
 .mat-tab-label, .mat-tab-link{
   color:rgb(0, 0, 0) !important;
+  align-items: center;
 }
 
 html, body { height: 100%; }

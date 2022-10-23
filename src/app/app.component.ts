@@ -38,14 +38,14 @@ export class AppComponent {
     };
     const body = { id: '6', username: 'Employee 66', dateOfBirth: '2/2/1997' };
     this.http
-      .get('http://localhost:8080/dashboard', { headers, responseType: 'text' })
+      .get(environment.URL+'+/dashboard', { headers, responseType: 'text' })
       .subscribe((data) => {
         // this.postId = data.id;
         alert(JSON.stringify(data));
       });
 
     this.http
-      .post('http://localhost:8080/addEmployee', body, { headers })
+      .post(environment.URL+'+/addEmployee', body, { headers })
       .subscribe((data) => {
         // this.postId = data.id;
         alert(JSON.stringify(data));

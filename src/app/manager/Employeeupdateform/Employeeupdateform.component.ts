@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { employeeupdate } from '../manager.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-Employeeupdateform',
@@ -38,12 +39,8 @@ export class EmployeeupdateformComponent {
       };
 
       this.http
-        .post('http://localhost:8080/updateEmployee', body, { headers })
-        .subscribe((data) => {
-          // this.postId = data.id;
-          alert('Employee updated');
-          location.reload();
-        });
+        .post(environment.URL + '/updateEmployee', body, { headers })
+        .subscribe((data) => {});
     }
     this.dialogRef.close();
   }

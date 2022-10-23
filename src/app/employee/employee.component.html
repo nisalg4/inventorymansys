@@ -20,7 +20,11 @@
   </style>
 </head>
 
-<p>Hello {{name}} !</p>
+
+<h1 style="text-align: center;"><b>Hello {{name}} !</b>
+  <div mat-dialog-actions align="center"><button mat-raised-button color="warn" type="button"
+      (click)="logout()">LogOut</button></div>
+</h1>
 
 <div class="w3-row">
   <div class="w3-twothird">
@@ -44,5 +48,3 @@
 
 
 </div>
-
-<button type="button" (click)="logout()">Logout</button>
